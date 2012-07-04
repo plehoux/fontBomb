@@ -3,8 +3,13 @@ class Explosion
     @bombs = []
     @body          = document.getElementsByTagName("body")[0]
     @body?.onclick = (event)=>@dropBomb(event)
-    @body.addEventListener("touchstart", (event)=>
-      @dropBomb(event)
+    @body.addEventListener("touchmove", (event)=>
+        @touchMoveCount ||= 0
+        @touchMoveCount++
+      )
+    @body.addEventListener("touchend", (event)=>
+        @dropBomb(event) if @touchMoveCount < 3
+        @touchMoveCount = 0
       )
     @explosifyNodes  @body.childNodes
     @chars = for char in document.getElementsByTagName('particle')

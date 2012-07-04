@@ -21,8 +21,15 @@
           return _this.dropBomb(event);
         };
       }
-      this.body.addEventListener("touchstart", function(event) {
-        return _this.dropBomb(event);
+      this.body.addEventListener("touchmove", function(event) {
+        _this.touchMoveCount || (_this.touchMoveCount = 0);
+        return _this.touchMoveCount++;
+      });
+      this.body.addEventListener("touchend", function(event) {
+        if (_this.touchMoveCount < 3) {
+          _this.dropBomb(event);
+        }
+        return _this.touchMoveCount = 0;
       });
       this.explosifyNodes(this.body.childNodes);
       this.chars = (function() {
