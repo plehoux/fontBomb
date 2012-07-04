@@ -1,0 +1,84 @@
+@import "reset"
+@import 'nib'
+
+body
+  background-color:#f4f4f4
+  font-size:18px
+  padding:0
+
+header
+  width:100%
+  font-family: "freight-sans-pro",sans-serif
+  background-color:#e8e8e8;
+  padding:1em 0 2em 0
+
+  h1
+    margin:0.3em
+    font-size:2.5em
+    text-align:center
+    color:#252525
+    font-weight:100
+
+  h1:after
+    display:block
+    font-size:.8em
+    content:"~"
+    line-height:0.08em
+
+  p
+    font-size:0.9em
+    text-align:center
+    line-height:1.5em
+    padding:0 5px
+
+  p:nth-child(2)
+    a
+      color:#fe3a1a
+      font-weight:bold
+      text-decoration:none
+
+  p:last-child
+    color:#666
+    font-size:0.8em
+    a
+      color:#666
+      text-decoration:none
+
+section
+  text-align:left
+  min-width:500px
+  width:500px
+  margin:0 auto
+  padding:1em
+
+  p
+    font-size:1em
+    margin:1.5em
+    line-height:1.3em
+    font-family: "freight-text-pro",sans-serif
+    letter-spacing:1px
+
+  p.right
+    text-align:right
+
+  h2
+    width:100%
+    text-align:center
+    margin-top:0.4em
+    margin-bottom:0.4em
+    font-family: "maryam",cursive;
+    font-weight:100
+    font-size: 6em
+
+@media screen and (max-width: 480px)
+  section
+    padding:0.1em
+
+    p
+      width:360px
+      font-size:0.8em
+      //margin-left:40px
+
+    h2
+      width:430px
+      font-size:4em

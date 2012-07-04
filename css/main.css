@@ -1,0 +1,231 @@
+html,
+body,
+div,
+span,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+abbr,
+address,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+samp,
+small,
+strong,
+sub,
+sup,
+var,
+b,
+i,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  background: transparent;
+  border: 0;
+  font-size: 100%;
+  margin: 0;
+  outline: 0;
+  padding: 0;
+  vertical-align: baseline;
+}
+body {
+  line-height: 1;
+}
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+nav ul {
+  list-style: none;
+}
+blockquote,
+q {
+  quotes: none;
+}
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: '';
+  content: none;
+}
+a {
+  background: transparent;
+  font-size: 100%;
+  margin: 0;
+  padding: 0;
+  vertical-align: baseline;
+}
+ins {
+  background-color: #ff9;
+  color: #000;
+  text-decoration: none;
+}
+mark {
+  background-color: #ff9;
+  color: #000;
+  font-style: italic;
+  font-weight: bold;
+}
+del {
+  text-decoration: line-through;
+}
+abbr[title],
+dfn[title] {
+  border-bottom: 1px dotted;
+  cursor: help;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+hr {
+  border: 0;
+  border-top: 1px solid #ccc;
+  display: block;
+  height: 1px;
+  margin: 1em 0;
+  padding: 0;
+}
+input,
+select {
+  vertical-align: middle;
+}
+body {
+  background-color: #f4f4f4;
+  font-size: 18px;
+  padding: 0;
+}
+header {
+  width: 100%;
+  font-family: "freight-sans-pro", sans-serif;
+  background-color: #e8e8e8;
+  padding: 1em 0 2em 0;
+}
+header h1 {
+  margin: 0.3em;
+  font-size: 2.5em;
+  text-align: center;
+  color: #252525;
+  font-weight: 100;
+}
+header h1:after {
+  display: block;
+  font-size: 0.8em;
+  content: "~";
+  line-height: 0.08em;
+}
+header p {
+  font-size: 0.9em;
+  text-align: center;
+  line-height: 1.5em;
+  padding: 0 5px;
+}
+header p:nth-child(2) a {
+  color: #fe3a1a;
+  font-weight: bold;
+  text-decoration: none;
+}
+header p:last-child {
+  color: #666;
+  font-size: 0.8em;
+}
+header p:last-child a {
+  color: #666;
+  text-decoration: none;
+}
+section {
+  text-align: left;
+  min-width: 500px;
+  width: 500px;
+  margin: 0 auto;
+  padding: 1em;
+}
+section p {
+  font-size: 1em;
+  margin: 1.5em;
+  line-height: 1.3em;
+  font-family: "freight-text-pro", sans-serif;
+  letter-spacing: 1px;
+}
+section p.right {
+  text-align: right;
+}
+section h2 {
+  width: 100%;
+  text-align: center;
+  margin-top: 0.4em;
+  margin-bottom: 0.4em;
+  font-family: "maryam", cursive;
+  font-weight: 100;
+  font-size: 6em;
+}
+@media screen and (max-width: 480px) {
+  section {
+    padding: 0.1em;
+  }
+  section p {
+    width: 360px;
+    font-size: 0.8em;
+  }
+  section h2 {
+    width: 430px;
+    font-size: 4em;
+  }
+}
