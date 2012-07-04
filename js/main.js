@@ -229,10 +229,11 @@
       }
       this.body.addEventListener("touchmove", function(event) {
         _this.touchMoveCount || (_this.touchMoveCount = 0);
-        return _this.touchMoveCount++;
+        _this.touchMoveCount++;
+        return _this.touchEvent = event;
       });
       this.body.addEventListener("touchend", function(event) {
-        if (_this.touchMoveCount < 3) _this.dropBomb(event);
+        if (_this.touchMoveCount < 3) _this.dropBomb(_this.touchEvent);
         return _this.touchMoveCount = 0;
       });
       this.explosifyNodes(this.body.childNodes);

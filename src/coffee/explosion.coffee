@@ -6,9 +6,10 @@ class Explosion
     @body.addEventListener("touchmove", (event)=>
         @touchMoveCount ||= 0
         @touchMoveCount++
+        @touchEvent = event
       )
     @body.addEventListener("touchend", (event)=>
-        @dropBomb(event) if @touchMoveCount < 3
+        @dropBomb(@touchEvent) if @touchMoveCount < 3
         @touchMoveCount = 0
       )
     @explosifyNodes  @body.childNodes
