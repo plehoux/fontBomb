@@ -21,7 +21,9 @@
           return _this.dropBomb(event);
         };
       }
-      this.body.addEventListener("touchend", this.dropBomb, false);
+      this.body.addEventListener("touchstart", function(event) {
+        return _this.dropBomb(event);
+      });
       this.explosifyNodes(this.body.childNodes);
       this.chars = (function() {
         var _i, _len, _ref1, _results;

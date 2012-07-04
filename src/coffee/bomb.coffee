@@ -1,7 +1,6 @@
 class Bomb
   @SIZE = 50
   constructor:(x,y)->
-    console.log x,y
     @pos = 
       x:x 
       y:y

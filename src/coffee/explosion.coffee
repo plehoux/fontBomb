@@ -3,7 +3,9 @@ class Explosion
     @bombs = []
     @body          = document.getElementsByTagName("body")[0]
     @body?.onclick = (event)=>@dropBomb(event)
-    @body.addEventListener("touchend", @dropBomb, false);
+    @body.addEventListener("touchstart", (event)=>
+      @dropBomb(event)
+      )
     @explosifyNodes  @body.childNodes
     @chars = for char in document.getElementsByTagName('particle')
       new Particle(char,@body)

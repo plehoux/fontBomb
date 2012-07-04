@@ -149,8 +149,7 @@
 
     function Bomb(x, y) {
       this.countDown = __bind(this.countDown, this);
-      this.drop = __bind(this.drop, this);      console.log(x, y);
-      this.pos = {
+      this.drop = __bind(this.drop, this);      this.pos = {
         x: x,
         y: y
       };
@@ -228,7 +227,9 @@
           return _this.dropBomb(event);
         };
       }
-      this.body.addEventListener("touchend", this.dropBomb, false);
+      this.body.addEventListener("touchstart", function(event) {
+        return _this.dropBomb(event);
+      });
       this.explosifyNodes(this.body.childNodes);
       this.chars = (function() {
         var _j, _len2, _ref3, _results;

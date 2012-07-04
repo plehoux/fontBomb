@@ -13,7 +13,6 @@
       this.countDown = __bind(this.countDown, this);
 
       this.drop = __bind(this.drop, this);
-      console.log(x, y);
       this.pos = {
         x: x,
         y: y
