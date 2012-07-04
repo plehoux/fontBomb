@@ -3,10 +3,12 @@ class Explosion
     @bombs = []
     @body          = document.getElementsByTagName("body")[0]
     @body?.onclick = (event)=>@dropBomb(event)
+    @body.addEventListener("touchstart", (event)=>
+        @touchEvent = event
+      )
     @body.addEventListener("touchmove", (event)=>
         @touchMoveCount ||= 0
         @touchMoveCount++
-        @touchEvent = event
       )
     @body.addEventListener("touchend", (event)=>
         @dropBomb(@touchEvent) if @touchMoveCount < 3

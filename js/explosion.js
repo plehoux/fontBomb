@@ -21,10 +21,12 @@
           return _this.dropBomb(event);
         };
       }
+      this.body.addEventListener("touchstart", function(event) {
+        return _this.touchEvent = event;
+      });
       this.body.addEventListener("touchmove", function(event) {
         _this.touchMoveCount || (_this.touchMoveCount = 0);
-        _this.touchMoveCount++;
-        return _this.touchEvent = event;
+        return _this.touchMoveCount++;
       });
       this.body.addEventListener("touchend", function(event) {
         if (_this.touchMoveCount < 3) {
