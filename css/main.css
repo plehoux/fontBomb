@@ -192,7 +192,6 @@ header p:last-child a {
 }
 section {
   text-align: left;
-  min-width: 500px;
   width: 500px;
   margin: 0 auto;
   padding: 1em;
@@ -218,14 +217,15 @@ section h2 {
 }
 @media screen and (max-width: 480px) {
   section {
-    padding: 0.1em;
+    max-width: 100%;
+    padding: 0;
   }
   section p {
-    width: 360px;
+    width: 100%;
     font-size: 0.8em;
   }
   section h2 {
-    width: 430px;
+    width: 100%;
     font-size: 4em;
   }
 }
