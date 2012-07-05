@@ -1,0 +1,28 @@
+div#fontBombConfirmation {
+  position: absolute;
+  top: -200px;
+  left: 0px;
+  right: 0px;
+  bottom: none;
+  width: 100%;
+  padding: 18px;
+  margin: 0px;
+  background: #e8e8e8;
+  text-align: center;
+  font-size: 14px;
+  line-height: 14px;
+  font-family: verdana, sans-serif;
+  color: #000;
+  -webkit-transition: all 1s ease-in-out;
+  -moz-transition: all 1s ease-in-out;
+  -o-transition: all 1s ease-in-out;
+  -ms-transition: all 1s ease-in-out;
+  transition: all 1s ease-in-out;
+  -webkit-box-shadow: 0px 3px 3px rgba(0,0,0,0.20);
+  -moz-box-shadow: 0px 3px 3px rgba(0,0,0,0.20);
+  box-shadow: 0px 3px 3px rgba(0,0,0,0.20);
+  z-index: 100000002;
+}
+div#fontBombConfirmation span {
+  color: #fe3a1a;
+}
