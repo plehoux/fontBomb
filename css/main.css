@@ -231,6 +231,7 @@ section h2 {
 @media screen and (max-width: 480px) {
   header div,
   header iframe {
+    display: none;
     width: 380px !important;
     height: 213px !important;
   }
