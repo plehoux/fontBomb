@@ -192,8 +192,8 @@ header p:last-child a {
 }
 section {
   text-align: left;
-  min-width: 500px;
-  width: 500px;
+  min-width: 490px;
+  width: 490px;
   margin: 0 auto;
   padding: 1em;
 }
