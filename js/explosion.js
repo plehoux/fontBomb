@@ -7,13 +7,16 @@
 
     Explosion.name = 'Explosion';
 
-    function Explosion() {
+    function Explosion(confirmation) {
+      var char, _ref,
+        _this = this;
+      if (confirmation == null) {
+        confirmation = true;
+      }
       this.tick = __bind(this.tick, this);
 
       this.dropBomb = __bind(this.dropBomb, this);
 
-      var char, _ref,
-        _this = this;
       this.bombs = [];
       this.body = document.getElementsByTagName("body")[0];
       if ((_ref = this.body) != null) {
@@ -46,6 +49,20 @@
         return _results;
       }).call(this);
       this.tick();
+      if (confirmation != null) {
+        confirmation = document.createElement("div");
+        confirmation.innerHTML = "<span style='font-weight:bold;'>fontBomb loaded!</span> Click anywhere to destroy this website.";
+        confirmation.style['position'] = 'absolute';
+        confirmation.style['bottom'] = '0px';
+        confirmation.style['width'] = '100%';
+        confirmation.style['padding'] = '20px';
+        confirmation.style['background'] = '#e8e8e8';
+        confirmation.style['text-align'] = 'center';
+        confirmation.style['font-size'] = '14px';
+        confirmation.style['font-family'] = 'verdana';
+        confirmation.style['color'] = '#000';
+        this.body.appendChild(confirmation);
+      }
     }
 
     Explosion.prototype.explosifyNodes = function(nodes) {

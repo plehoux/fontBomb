@@ -82,7 +82,7 @@
     }
 
     Particle.prototype.tick = function(blast) {
-      var distX, distY, distanceWithBlast, force, forceX, forceY, previousRotation, previousStateX, previousStateY, rad;
+      var distX, distXS, distY, distYS, distanceWithBlast, force, forceX, forceY, previousRotation, previousStateX, previousStateY, rad;
       previousStateX = this.transform.x;
       previousStateY = this.transform.y;
       previousRotation = this.transform.rotation;
@@ -103,18 +103,20 @@
       if (blast != null) {
         distX = this.x() - blast.x;
         distY = this.y() - blast.y;
-        distanceWithBlast = Math.sqrt(distX * distX + distY * distY);
-        force = 1500 / distanceWithBlast;
-        rad = Math.asin(distY / distanceWithBlast);
-        forceY = Math.sin(rad) * force;
+        distXS = distX * distX;
+        distYS = distY * distY;
+        distanceWithBlast = distXS + distYS;
+        force = 100000 / distanceWithBlast;
+        rad = Math.asin(distYS / distanceWithBlast);
+        forceY = Math.sin(rad) * force * (distY < 0 ? -1 : 1);
         forceX = Math.cos(rad) * force * (distX < 0 ? -1 : 1);
         this.velocity.x = +forceX;
         this.velocity.y = +forceY;
       }
       this.transform.x = this.transform.x + this.velocity.x;
       this.transform.y = this.transform.y + this.velocity.y;
-      this.transform.rotation = this.transform.x * -10;
-      if ((previousStateX !== this.transform.x || previousStateY !== this.transform.y || previousRotation !== this.transform.rotation) && ((this.transform.x > 1 || this.transform.x < -1) || (this.transform.y > 1 || this.transform.y < -1))) {
+      this.transform.rotation = this.transform.x * -1;
+      if ((Math.abs(previousStateX - this.transform.x) > 1 || Math.abs(previousStateY - this.transform.y) > 1 || Math.abs(previousRotation - this.transform.rotation) > 1) && ((this.transform.x > 1 || this.transform.x < -1) || (this.transform.y > 1 || this.transform.y < -1))) {
         return this.setTransform();
       }
     };
@@ -215,11 +217,12 @@
 
   Explosion = (function() {
 
-    function Explosion() {
-      this.tick = __bind(this.tick, this);
-      this.dropBomb = __bind(this.dropBomb, this);
+    function Explosion(confirmation) {
       var char, _ref2,
         _this = this;
+      if (confirmation == null) confirmation = true;
+      this.tick = __bind(this.tick, this);
+      this.dropBomb = __bind(this.dropBomb, this);
       this.bombs = [];
       this.body = document.getElementsByTagName("body")[0];
       if ((_ref2 = this.body) != null) {
@@ -250,6 +253,20 @@
         return _results;
       }).call(this);
       this.tick();
+      if (confirmation != null) {
+        confirmation = document.createElement("div");
+        confirmation.innerHTML = "<span style='font-weight:bold;'>fontBomb loaded!</span> Click anywhere to destroy this website.";
+        confirmation.style['position'] = 'absolute';
+        confirmation.style['bottom'] = '0px';
+        confirmation.style['width'] = '100%';
+        confirmation.style['padding'] = '20px';
+        confirmation.style['background'] = '#e8e8e8';
+        confirmation.style['text-align'] = 'center';
+        confirmation.style['font-size'] = '14px';
+        confirmation.style['font-family'] = 'verdana';
+        confirmation.style['color'] = '#000';
+        this.body.appendChild(confirmation);
+      }
     }
 
     Explosion.prototype.explosifyNodes = function(nodes) {

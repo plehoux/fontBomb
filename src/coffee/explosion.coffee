@@ -1,5 +1,5 @@
 class Explosion
-  constructor:->
+  constructor:(confirmation = true)->
     @bombs = []
     @body          = document.getElementsByTagName("body")[0]
     @body?.onclick = (event)=>@dropBomb(event)
@@ -18,6 +18,19 @@ class Explosion
     @chars = for char in document.getElementsByTagName('particle')
       new Particle(char,@body)
     @tick()
+    if confirmation?
+      confirmation = document.createElement("div")
+      confirmation.innerHTML = "<span style='font-weight:bold;'>fontBomb loaded!</span> Click anywhere to destroy this website."
+      confirmation.style['position'] = 'absolute'
+      confirmation.style['bottom'] = '0px'
+      confirmation.style['width'] = '100%'
+      confirmation.style['padding'] = '20px'
+      confirmation.style['background'] = '#e8e8e8'
+      confirmation.style['text-align'] = 'center'
+      confirmation.style['font-size']  = '14px'
+      confirmation.style['font-family'] = 'verdana'
+      confirmation.style['color'] = '#000'
+      @body.appendChild confirmation
     
 
   explosifyNodes:(nodes)->
