@@ -156,7 +156,7 @@ header {
   width: 100%;
   font-family: "freight-sans-pro", sans-serif;
   background-color: #e8e8e8;
-  padding: 1em 0 2em 0;
+  padding: 1em 0 0.5em 0;
 }
 header h1 {
   margin: 0.3em;
@@ -176,6 +176,7 @@ header p {
   text-align: center;
   line-height: 1.5em;
   padding: 0 5px;
+  margin: 2em 0;
 }
 header p strong {
   font-size: 1.2em;
@@ -193,6 +194,13 @@ header p:last-child {
 header p:last-child a {
   color: #666;
   text-decoration: none;
+}
+header div {
+  width: 960px;
+  margin: 2em auto 2em auto;
+}
+header div.show {
+  display: block;
 }
 section {
   text-align: left;
@@ -221,6 +229,11 @@ section h2 {
   font-size: 6em;
 }
 @media screen and (max-width: 480px) {
+  header div,
+  header iframe {
+    width: 380px !important;
+    height: 213px !important;
+  }
   section {
     max-width: 280px;
     min-width: 280px;
