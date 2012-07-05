@@ -177,7 +177,11 @@ header p {
   line-height: 1.5em;
   padding: 0 5px;
 }
+header p strong {
+  font-size: 1.2em;
+}
 header p:nth-child(2) a {
+  font-size: 1.2em;
   color: #fe3a1a;
   font-weight: bold;
   text-decoration: none;
