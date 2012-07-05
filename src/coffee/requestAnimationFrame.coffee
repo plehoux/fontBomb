@@ -1,9 +1,9 @@
 w = window
 for vendor in ['ms', 'moz', 'webkit', 'o']
     break if w.requestAnimationFrame
-    w.requestAnimationFrame = w["#{vendor}RequestAnimationFrame"]
-    w.cancelAnimationFrame = (w["#{vendor}CancelAnimationFrame"] or
-                              w["#{vendor}CancelRequestAnimationFrame"])
+    w.requestAnimationFrame = w["#vendorRequestAnimationFrame"]
+    w.cancelAnimationFrame = (w["#vendorCancelAnimationFrame"] or
+                              w["#vendorCancelRequestAnimationFrame"])
 
 targetTime = 0
 w.requestAnimationFrame or= (callback) ->
@@ -18,12 +18,12 @@ w.findClickPos = (e)->
   posy = 0
   if (!e) then e = window.event
   if (e.pageX || e.pageY)
-    posx = e.pageX;
-    posy = e.pageY;
+    posx = e.pageX
+    posy = e.pageY
   else if (e.clientX || e.clientY)
     posx = e.clientX + document.body.scrollLeft + document.documentElement.scrollLeft
     posy = e.clientY + document.body.scrollTop + document.documentElement.scrollTop
-  {x:posx,y:posy}
+  x:posx,y:posy
 
 w.getOffset = (el)->
   body = document.getElementsByTagName("body")[0]
@@ -32,5 +32,5 @@ w.getOffset = (el)->
   while el and !isNaN(el.offsetLeft) and !isNaN(el.offsetTop) 
       _x += el.offsetLeft - el.scrollLeft
       _y += el.offsetTop - el.scrollTop
-      el = el.offsetParent;
-  { top: _y + body.scrollTop, left: _x + body.scrollLeft }
+      el = el.offsetParent
+   top: _y + body.scrollTop, left: _x + body.scrollLeft

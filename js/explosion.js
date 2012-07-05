@@ -7,16 +7,20 @@
 
     Explosion.name = 'Explosion';
 
-    function Explosion(confirmation) {
-      var char, _ref,
-        _this = this;
-      if (confirmation == null) {
-        confirmation = true;
-      }
+    function Explosion() {
       this.tick = __bind(this.tick, this);
 
       this.dropBomb = __bind(this.dropBomb, this);
 
+      var char, confirmation, style, _ref,
+        _this = this;
+      if (window.FONTBOMB_LOADED) {
+        return;
+      }
+      window.FONTBOMB_LOADED = true;
+      if (!window.FONTBOMB_HIDE_CONFIRMATION) {
+        confirmation = true;
+      }
       this.bombs = [];
       this.body = document.getElementsByTagName("body")[0];
       if ((_ref = this.body) != null) {
@@ -50,18 +54,19 @@
       }).call(this);
       this.tick();
       if (confirmation != null) {
-        confirmation = document.createElement("div");
-        confirmation.innerHTML = "<span style='font-weight:bold;'>fontBomb loaded!</span> Click anywhere to destroy this website.";
-        confirmation.style['position'] = 'absolute';
-        confirmation.style['bottom'] = '0px';
-        confirmation.style['width'] = '100%';
-        confirmation.style['padding'] = '20px';
-        confirmation.style['background'] = '#e8e8e8';
-        confirmation.style['text-align'] = 'center';
-        confirmation.style['font-size'] = '14px';
-        confirmation.style['font-family'] = 'verdana';
-        confirmation.style['color'] = '#000';
-        this.body.appendChild(confirmation);
+        style = document.createElement('style');
+        style.innerHTML = "\ndiv#fontBombConfirmation {\nposition: absolute;\ntop: -200px;\nleft: 0px;\nright: 0px;\nbottom: none;\nwidth: 100%;\npadding: 18px;\nmargin: 0px;\nbackground: #e8e8e8;\ntext-align: center;\nfont-size: 14px;\nline-height: 14px;\nfont-family: verdana, sans-serif;\ncolor: #000;\n-webkit-transition: all 1s ease-in-out;\n-moz-transition: all 1s ease-in-out;\n-o-transition: all 1s ease-in-out;\n-ms-transition: all 1s ease-in-out;\ntransition: all 1s ease-in-out;\n-webkit-box-shadow: 0px 3px 3px rgba(0,0,0,0.20);\n-moz-box-shadow: 0px 3px 3px rgba(0,0,0,0.20);\nbox-shadow: 0px 3px 3px rgba(0,0,0,0.20);\nz-index: 100000002;\n}\ndiv#fontBombConfirmation span {\ncolor: #fe3a1a;\n}\ndiv#fontBombConfirmation.show {\ntop:0px;\ndisplay:block;\n}";
+        document.head.appendChild(style);
+        this.confirmation = document.createElement("div");
+        this.confirmation.id = 'fontBombConfirmation';
+        this.confirmation.innerHTML = "<span style='font-weight:bold;'>fontBomb loaded!</span> Click anywhere to destroy " + (document.title.substring(0, 50));
+        this.body.appendChild(this.confirmation);
+        setTimeout(function() {
+          return _this.confirmation.className = 'show';
+        }, 10);
+        setTimeout(function() {
+          return _this.confirmation.className = '';
+        }, 5000);
       }
     }
 

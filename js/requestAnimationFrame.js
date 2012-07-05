@@ -10,8 +10,8 @@
     if (w.requestAnimationFrame) {
       break;
     }
-    w.requestAnimationFrame = w["" + vendor + "RequestAnimationFrame"];
-    w.cancelAnimationFrame = w["" + vendor + "CancelAnimationFrame"] || w["" + vendor + "CancelRequestAnimationFrame"];
+    w.requestAnimationFrame = w["#vendorRequestAnimationFrame"];
+    w.cancelAnimationFrame = w["#vendorCancelAnimationFrame"] || w["#vendorCancelRequestAnimationFrame"];
   }
 
   targetTime = 0;

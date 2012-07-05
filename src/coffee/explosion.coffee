@@ -1,5 +1,8 @@
 class Explosion
-  constructor:(confirmation = true)->
+  constructor:()->
+    return if window.FONTBOMB_LOADED
+    window.FONTBOMB_LOADED = true
+    confirmation = true unless window.FONTBOMB_HIDE_CONFIRMATION
     @bombs = []
     @body          = document.getElementsByTagName("body")[0]
     @body?.onclick = (event)=>@dropBomb(event)
@@ -19,19 +22,53 @@ class Explosion
       new Particle(char,@body)
     @tick()
     if confirmation?
-      confirmation = document.createElement("div")
-      confirmation.innerHTML = "<span style='font-weight:bold;'>fontBomb loaded!</span> Click anywhere to destroy this website."
-      confirmation.style['position'] = 'absolute'
-      confirmation.style['bottom'] = '0px'
-      confirmation.style['width'] = '100%'
-      confirmation.style['padding'] = '20px'
-      confirmation.style['background'] = '#e8e8e8'
-      confirmation.style['text-align'] = 'center'
-      confirmation.style['font-size']  = '14px'
-      confirmation.style['font-family'] = 'verdana'
-      confirmation.style['color'] = '#000'
-      @body.appendChild confirmation
-    
+      style = document.createElement('style')
+      style.innerHTML = """
+
+  div#fontBombConfirmation {
+  position: absolute;
+  top: -200px;
+  left: 0px;
+  right: 0px;
+  bottom: none;
+  width: 100%;
+  padding: 18px;
+  margin: 0px;
+  background: #e8e8e8;
+  text-align: center;
+  font-size: 14px;
+  line-height: 14px;
+  font-family: verdana, sans-serif;
+  color: #000;
+  -webkit-transition: all 1s ease-in-out;
+  -moz-transition: all 1s ease-in-out;
+  -o-transition: all 1s ease-in-out;
+  -ms-transition: all 1s ease-in-out;
+  transition: all 1s ease-in-out;
+  -webkit-box-shadow: 0px 3px 3px rgba(0,0,0,0.20);
+  -moz-box-shadow: 0px 3px 3px rgba(0,0,0,0.20);
+  box-shadow: 0px 3px 3px rgba(0,0,0,0.20);
+  z-index: 100000002;
+}
+div#fontBombConfirmation span {
+  color: #fe3a1a;
+}
+div#fontBombConfirmation.show {
+  top:0px;
+  display:block;
+}
+"""
+      document.head.appendChild style
+      @confirmation = document.createElement("div")
+      @confirmation.id = 'fontBombConfirmation'
+      @confirmation.innerHTML = "<span style='font-weight:bold;'>fontBomb loaded!</span> Click anywhere to destroy #{document.title.substring(0,50)}"
+      @body.appendChild @confirmation
+      setTimeout(=>
+        @confirmation.className = 'show'
+      ,10)
+      setTimeout(=>
+        @confirmation.className = ''
+      ,5000)
 
   explosifyNodes:(nodes)->
     for node in nodes

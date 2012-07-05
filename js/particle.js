@@ -6,81 +6,64 @@
 
     Particle.name = 'Particle';
 
-    Particle.FRICTION = 0.9;
-
     function Particle(elem) {
       this.elem = elem;
-      this.transform = {
-        x: 0,
-        y: 0,
-        rotation: 0
-      };
-      this.offset = {
-        top: window.getOffset(this.elem).top,
-        left: window.getOffset(this.elem).left
-      };
-      this.velocity = {
-        x: 0,
-        y: 0
-      };
+      this.style = elem.style;
+      this.elem.style['zIndex'] = 9999;
+      this.transformX = 0;
+      this.transformY = 0;
+      this.transformRotation = 0;
+      this.offsetTop = window.getOffset(this.elem).top;
+      this.offsetLeft = window.getOffset(this.elem).left;
+      this.velocityX = 0;
+      this.velocityY = 0;
     }
 
     Particle.prototype.tick = function(blast) {
-      var distX, distXS, distY, distYS, distanceWithBlast, force, forceX, forceY, previousRotation, previousStateX, previousStateY, rad;
-      previousStateX = this.transform.x;
-      previousStateY = this.transform.y;
-      previousRotation = this.transform.rotation;
-      if (this.velocity.x > Particle.FRICTION) {
-        this.velocity.x -= Particle.FRICTION;
-      } else if (this.velocity.x < -Particle.FRICTION) {
-        this.velocity.x += Particle.FRICTION;
+      var distX, distXS, distY, distYS, distanceWithBlast, force, forceX, forceY, previousRotation, previousStateX, previousStateY, rad, transform;
+      previousStateX = this.transformX;
+      previousStateY = this.transformY;
+      previousRotation = this.transformRotation;
+      if (this.velocityX > 1.5) {
+        this.velocityX -= 1.5;
+      } else if (this.velocityX < -1.5) {
+        this.velocityX += 1.5;
       } else {
-        this.velocity.x = 0;
+        this.velocityX = 0;
       }
-      if (this.velocity.y > Particle.FRICTION) {
-        this.velocity.y -= Particle.FRICTION;
-      } else if (this.velocity.y < -Particle.FRICTION) {
-        this.velocity.y += Particle.FRICTION;
+      if (this.velocityY > 1.5) {
+        this.velocityY -= 1.5;
+      } else if (this.velocityY < -1.5) {
+        this.velocityY += 1.5;
       } else {
-        this.velocity.y = 0;
+        this.velocityY = 0;
       }
       if (blast != null) {
-        distX = this.x() - blast.x;
-        distY = this.y() - blast.y;
+        distX = this.offsetLeft + this.transformX - blast.x;
+        distY = this.offsetTop + this.transformY - blast.y;
         distXS = distX * distX;
         distYS = distY * distY;
         distanceWithBlast = distXS + distYS;
         force = 100000 / distanceWithBlast;
+        if (force > 50) {
+          force = 50;
+        }
         rad = Math.asin(distYS / distanceWithBlast);
         forceY = Math.sin(rad) * force * (distY < 0 ? -1 : 1);
         forceX = Math.cos(rad) * force * (distX < 0 ? -1 : 1);
-        this.velocity.x = +forceX;
-        this.velocity.y = +forceY;
+        this.velocityX = +forceX;
+        this.velocityY = +forceY;
       }
-      this.transform.x = this.transform.x + this.velocity.x;
-      this.transform.y = this.transform.y + this.velocity.y;
-      this.transform.rotation = this.transform.x * -1;
-      if ((Math.abs(previousStateX - this.transform.x) > 1 || Math.abs(previousStateY - this.transform.y) > 1 || Math.abs(previousRotation - this.transform.rotation) > 1) && ((this.transform.x > 1 || this.transform.x < -1) || (this.transform.y > 1 || this.transform.y < -1))) {
-        return this.setTransform();
+      this.transformX = this.transformX + this.velocityX;
+      this.transformY = this.transformY + this.velocityY;
+      this.transformRotation = this.transformX * -1;
+      if ((Math.abs(previousStateX - this.transformX) > 1 || Math.abs(previousStateY - this.transformY) > 1 || Math.abs(previousRotation - this.transformRotation) > 1) && ((this.transformX > 1 || this.transformX < -1) || (this.transformY > 1 || this.transformY < -1))) {
+        transform = "translate(" + this.transformX + "px, " + this.transformY + "px) rotate(" + this.transformRotation + "deg)";
+        this.style['MozTransform'] = transform;
+        this.style['WebkitTransform'] = transform;
+        this.style['MsTransform'] = transform;
+        return this.style['transform'] = transform;
       }
-    };
-
-    Particle.prototype.setTransform = function() {
-      var transform;
-      transform = "translate(" + this.transform.x + "px, " + this.transform.y + "px) rotate(" + this.transform.rotation + "deg)";
-      this.elem.style['MozTransform'] = transform;
-      this.elem.style['WebkitTransform'] = transform;
-      this.elem.style['MsTransform'] = transform;
-      this.elem.style['transform'] = transform;
-      return this.elem.style['zIndex'] = 9999;
-    };
-
-    Particle.prototype.y = function() {
-      return this.offset.top + this.transform.y;
-    };
-
-    Particle.prototype.x = function() {
-      return this.offset.left + this.transform.x;
     };
 
     return Particle;

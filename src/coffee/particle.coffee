@@ -1,55 +1,44 @@
 class Particle
-  @FRICTION = 0.9
   constructor:(elem)->
-    @elem      = elem
-    @transform =
-      x: 0
-      y: 0
-      rotation: 0
-    @offset    = 
-      top: window.getOffset(@elem).top
-      left: window.getOffset(@elem).left
-    @velocity  = 
-      x:0
-      y:0
+    @elem                 = elem
+    @style                = elem.style
+    @elem.style['zIndex'] = 9999
+    @transformX           = 0
+    @transformY           = 0
+    @transformRotation    = 0
+    @offsetTop  = window.getOffset(@elem).top
+    @offsetLeft = window.getOffset(@elem).left
+    @velocityX  = 0
+    @velocityY  = 0
 
   tick:(blast)->
-    previousStateX = @transform.x
-    previousStateY = @transform.y
-    previousRotation = @transform.rotation
-    if @velocity.x > Particle.FRICTION then @velocity.x -= Particle.FRICTION else if @velocity.x < -Particle.FRICTION then @velocity.x += Particle.FRICTION else @velocity.x = 0
-    if @velocity.y > Particle.FRICTION then @velocity.y -= Particle.FRICTION else if @velocity.y < -Particle.FRICTION then @velocity.y += Particle.FRICTION else @velocity.y = 0
-
+    previousStateX = @transformX
+    previousStateY = @transformY
+    previousRotation = @transformRotation
+    if @velocityX > 1.5 then @velocityX -= 1.5 else if @velocityX < -1.5 then @velocityX += 1.5 else @velocityX = 0
+    if @velocityY > 1.5 then @velocityY -= 1.5 else if @velocityY < -1.5 then @velocityY += 1.5 else @velocityY = 0
     if blast?
-      distX  = @x() - blast.x
-      distY  = @y() - blast.y
+      distX  = @offsetLeft + @transformX - blast.x
+      distY  = @offsetTop + @transformY - blast.y
       distXS = distX * distX
       distYS = distY * distY
       distanceWithBlast = distXS+distYS
       force  = 100000/distanceWithBlast
+      force  = 50 if force > 50
       rad    = Math.asin distYS/distanceWithBlast 
       forceY = Math.sin(rad)*force * if distY < 0 then -1 else 1
       forceX = Math.cos(rad)*force * if distX < 0 then -1 else 1
-      @velocity.x =+ forceX
-      @velocity.y =+ forceY
+      @velocityX =+ forceX
+      @velocityY =+ forceY
+    @transformX = @transformX + @velocityX
+    @transformY = @transformY + @velocityY
+    @transformRotation = @transformX*-1
     
-    @transform.x = @transform.x + @velocity.x
-    @transform.y = @transform.y + @velocity.y
-    @transform.rotation = @transform.x*-1
-    @setTransform() if (Math.abs(previousStateX - @transform.x) > 1 or Math.abs(previousStateY - @transform.y) > 1 or Math.abs(previousRotation - @transform.rotation) > 1) and ((@transform.x > 1 or @transform.x < -1) or (@transform.y > 1 or @transform.y < -1)) 
-
-  setTransform: ->
-    transform = "translate(#{@transform.x}px, #{@transform.y}px) rotate(#{@transform.rotation}deg)"
-    @elem.style['MozTransform']    = transform
-    @elem.style['WebkitTransform'] = transform
-    @elem.style['MsTransform']     = transform
-    @elem.style['transform']       = transform
-    @elem.style['zIndex']          = 9999
-
-  y:->
-    @offset.top + @transform.y
-
-  x:->
-    @offset.left + @transform.x
+    if (Math.abs(previousStateX - @transformX) > 1 or Math.abs(previousStateY - @transformY) > 1 or Math.abs(previousRotation - @transformRotation) > 1) and ((@transformX > 1 or @transformX < -1) or (@transformY > 1 or @transformY < -1)) 
+      transform = "translate(#{@transformX}px, #{@transformY}px) rotate(#{@transformRotation}deg)"
+      @style['MozTransform']    = transform
+      @style['WebkitTransform'] = transform
+      @style['MsTransform']     = transform
+      @style['transform']       = transform
 
 this.Particle = Particle
