@@ -24,8 +24,7 @@ class Explosion
     if confirmation?
       style = document.createElement('style')
       style.innerHTML = """
-
-  div#fontBombConfirmation {
+div#fontBombConfirmation {
   position: absolute;
   top: -200px;
   left: 0px;
