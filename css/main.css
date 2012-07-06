@@ -148,7 +148,7 @@ select {
   vertical-align: middle;
 }
 body {
-  background-color: #f4f4f4;
+  background-color: #fff;
   font-size: 18px;
   padding: 0;
 }
@@ -156,6 +156,12 @@ header {
   width: 100%;
   font-family: "freight-sans-pro", sans-serif;
   background-color: #e8e8e8;
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0.01, #ededed), color-stop(1, #f4f4f4));
+  background: -webkit-linear-gradient(top, #ededed 1%, #f4f4f4 100%);
+  background: -moz-linear-gradient(top, #ededed 1%, #f4f4f4 100%);
+  background: -o-linear-gradient(top, #ededed 1%, #f4f4f4 100%);
+  background: -ms-linear-gradient(top, #ededed 1%, #f4f4f4 100%);
+  background: linear-gradient(top, #ededed 1%, #f4f4f4 100%);
   padding: 1em 0 0.5em 0;
 }
 header h1 {

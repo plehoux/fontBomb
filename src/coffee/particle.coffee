@@ -38,7 +38,7 @@ class Particle
       transform = "translate(#{@transformX}px, #{@transformY}px) rotate(#{@transformRotation}deg)"
       @style['MozTransform']    = transform
       @style['WebkitTransform'] = transform
-      @style['MsTransform']     = transform
+      @style['msTransform']     = transform
       @style['transform']       = transform
 
 this.Particle = Particle

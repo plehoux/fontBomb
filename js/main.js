@@ -115,7 +115,7 @@
         transform = "translate(" + this.transformX + "px, " + this.transformY + "px) rotate(" + this.transformRotation + "deg)";
         this.style['MozTransform'] = transform;
         this.style['WebkitTransform'] = transform;
-        this.style['MsTransform'] = transform;
+        this.style['msTransform'] = transform;
         return this.style['transform'] = transform;
       }
     };
