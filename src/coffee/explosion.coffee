@@ -49,7 +49,7 @@ div#fontBombConfirmation {
   box-shadow: 0px 3px 3px rgba(0,0,0,0.20);
   z-index: 100000002;
 }
-div#fontBombConfirmation span {
+div#fontBombConfirmation span,div#fontBombConfirmation a {
   color: #fe3a1a;
 }
 div#fontBombConfirmation.show {
@@ -67,6 +67,13 @@ div#fontBombConfirmation.show {
       ,10)
       setTimeout(=>
         @confirmation.className = ''
+        setTimeout(=>
+          @confirmation.innerHTML = "If you think fontBomb is a blast, follow me on twitter <a href='http://www.twitter.com/plehoux'>@plehoux</a> for my next experiment!"
+          @confirmation.className = 'show'
+          setTimeout(=>
+            @confirmation.className = ''
+          ,20000)
+        ,5000)
       ,5000)
 
   explosifyNodes:(nodes)->

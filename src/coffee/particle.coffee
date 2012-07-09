@@ -37,6 +37,7 @@ class Particle
     if (Math.abs(previousStateX - @transformX) > 1 or Math.abs(previousStateY - @transformY) > 1 or Math.abs(previousRotation - @transformRotation) > 1) and ((@transformX > 1 or @transformX < -1) or (@transformY > 1 or @transformY < -1)) 
       transform = "translate(#{@transformX}px, #{@transformY}px) rotate(#{@transformRotation}deg)"
       @style['MozTransform']    = transform
+      @style['OTransform']      = transform
       @style['WebkitTransform'] = transform
       @style['msTransform']     = transform
       @style['transform']       = transform

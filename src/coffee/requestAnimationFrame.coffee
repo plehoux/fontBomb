@@ -12,7 +12,6 @@ w.requestAnimationFrame or= (callback) ->
 
 w.cancelAnimationFrame or= (id) -> clearTimeout id
 
-
 w.findClickPos = (e)-> 
   posx = 0
   posy = 0
