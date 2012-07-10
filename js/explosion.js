@@ -144,7 +144,7 @@
       pos = window.findClickPos(event);
       this.bombs.push(new Bomb(pos.x, pos.y));
       if (window.FONTBOMB_PREVENT_DEFAULT) {
-        return false;
+        return event.preventDefault();
       }
     };
 
