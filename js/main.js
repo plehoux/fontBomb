@@ -222,7 +222,7 @@
         return _this.touchMoveCount++;
       });
       this.body.addEventListener("touchend", function(event) {
-        if (_this.touchMoveCount < 3) _this.dropBomb(_this.touchEvent);
+        if (_this.touchMoveCount < 2) _this.dropBomb(_this.touchEvent);
         return _this.touchMoveCount = 0;
       });
       this.explosifyNodes(this.body.childNodes);
@@ -326,7 +326,8 @@
     Explosion.prototype.dropBomb = function(event) {
       var pos;
       pos = window.findClickPos(event);
-      return this.bombs.push(new Bomb(pos.x, pos.y));
+      this.bombs.push(new Bomb(pos.x, pos.y));
+      if (window.FONTBOMB_PREVENT_DEFAULT) return event.preventDefault;
     };
 
     Explosion.prototype.tick = function() {

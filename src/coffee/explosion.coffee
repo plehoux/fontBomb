@@ -14,7 +14,7 @@ class Explosion
         @touchMoveCount++
       )
     @body.addEventListener("touchend", (event)=>
-        @dropBomb(@touchEvent) if @touchMoveCount < 3
+        @dropBomb(@touchEvent) if @touchMoveCount < 2
         @touchMoveCount = 0
       )
     @explosifyNodes  @body.childNodes
@@ -103,6 +103,7 @@ div#fontBombConfirmation.show {
   dropBomb:(event)=>
     pos = window.findClickPos(event)
     @bombs.push new Bomb(pos.x,pos.y)
+    event.preventDefault if window.FONTBOMB_PREVENT_DEFAULT
 
   tick:=>
     for bomb in @bombs
