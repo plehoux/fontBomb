@@ -103,7 +103,7 @@ div#fontBombConfirmation.show {
   dropBomb:(event)=>
     pos = window.findClickPos(event)
     @bombs.push new Bomb(pos.x,pos.y)
-    event.preventDefault if window.FONTBOMB_PREVENT_DEFAULT
+    false if window.FONTBOMB_PREVENT_DEFAULT
 
   tick:=>
     for bomb in @bombs
