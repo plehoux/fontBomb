@@ -81,6 +81,8 @@ div#fontBombConfirmation.show {
       @explosifyNode(node)
   
   explosifyNode:(node)->
+    for name in ['script','style','iframe','canvas','video','audio','textarea','embed','object','select','area','map','input']
+      return if node.nodeName.toLowerCase() == name
     switch node.nodeType
       when 1 then @explosifyNodes(node.childNodes)
       when 3

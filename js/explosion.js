@@ -88,7 +88,14 @@
     };
 
     Explosion.prototype.explosifyNode = function(node) {
-      var newNode;
+      var name, newNode, _i, _len, _ref;
+      _ref = ['script', 'style', 'iframe', 'canvas', 'video', 'audio', 'textarea', 'embed', 'object', 'select', 'area', 'map', 'input'];
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        name = _ref[_i];
+        if (node.nodeName.toLowerCase() === name) {
+          return;
+        }
+      }
       switch (node.nodeType) {
         case 1:
           return this.explosifyNodes(node.childNodes);
